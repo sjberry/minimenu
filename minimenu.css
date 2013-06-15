@@ -1,0 +1,17 @@
+div.mm-anchor {
+	position: absolute;
+	background-color: #DDD;
+	border: 1px solid #666;
+}
+div.mm-anchor > div {
+	cursor: pointer;
+	padding: 2px 4px;
+}
+div.mm-anchor.icons > div { padding-left: 24px; }
+div.mm-anchor > div:hover { background-color: #B8D3E6; }
+
+
+div.mm-anchor > div:first-child { margin: 0; }
+
+div.mm-anchor.construct { position: static; }
+div.mm-anchor.construct > div { display: inline; }
