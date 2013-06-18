@@ -6,19 +6,41 @@
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="minimenu.css" />
-		<script type="text/javascript" src="minimenu.js"></script>
+		<!--<script type="text/javascript" src="minimenu.js"></script>-->
+		<script type="text/javascript" src="minimenu.min.js"></script>
 		
 		<script type="text/javascript">
+			// Placing "menu" in the global scope to enable command line interaction.
+			var menu;
+			
 			$(document).ready(function() {
-				$('div.test').minimenu([
-					{ event: 'view', text: 'View this!' },
-					{ event: 'edit', text: 'Edit this!' },
-					{ event: 'delete', text: 'Delete this!' },
-					{ text: 'Cancel!' },
-				]);
+				menu = $(document).minimenu('div.test', 'contextmenu', {
+					options: [
+						{ event: 'view', text: 'View this!' },
+						{ event: 'edit', text: 'Edit this!' },
+						{ event: 'delete', text: 'Delete this!' },
+						{ text: 'Cancel!' },
+					]
+				}).hook('pre', function(e) {
+					console.log('Pre-hook Context:');
+					console.log(this);
+					console.log('Pre-hook Event:');
+					console.log(e);
+					e.currentMenu.options('.mm-view').addClass('invalid');
+				}).hook('post', function(e) {
+					console.log('Post-hook Context:');
+					console.log(this);
+					console.log('Post-hook Event:');
+					console.log(e);
+					e.currentMenu.options().removeClass('invalid');
+				});
+				
+				console.log(menu);
 				
 				$(document).delegate('div.test', 'view edit delete', function(e) {
+					console.log('Target Element:');
 					console.log(this);
+					console.log('Event Type:');
 					console.log(e.type);
 				});
 			});
