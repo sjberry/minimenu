@@ -16,14 +16,10 @@ div.mm-anchor.construct { position: static; }
 div.mm-anchor.construct > div { display: inline; }
 div.mm-anchor > div.mm-invalid {
 	cursor: default;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+	filter: alpha(opacity=40);
+	-moz-opacity: 0.4;
+	-khtml-opacity: 0.4;
 	opacity: 0.4;
 }
 div.mm-anchor > div.mm-invalid:hover { background-color: #DDD; }
-
-/* COMPATIBILITY */
-div.mm-anchor > div.mm-invalid {
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-	filter: alpha(opacity=40);
-	-khtml-opacity: 0.5;
-	-moz-opacity: 0.5;
-}
