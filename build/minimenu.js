@@ -245,7 +245,6 @@
 		// Create a delegate to spawn a context menu based on provided condition parameters.
 		$(context).delegate(selector, events, function(e) {
 			e.preventDefault(); // Prevent the default context menu window.
-			e.stopPropagation(); // Don't click through to the document/window.
 			
 			hideActive(e);
 			// Run the menu's pre-hook processor.
