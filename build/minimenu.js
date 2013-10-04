@@ -32,6 +32,7 @@
 			var menu = menus[activeId];
 			$(menu.el).hide();
 			menu.hooks.post(e);
+			menu.reset();
 			activeId = null;
 		}
 	};
@@ -197,6 +198,13 @@
 			
 			return selector ? $options.filter(selector) : $options;
 		},
+		
+		invalidate: function(listString, message) {
+			return this.options(listString).addClass('mm-invalid').attr('title', message);
+		},
+		
+		reset: function(listString) {
+			return this.options(listString).removeClass('mm-invalid').removeAttr('title');
 		},
 		
 		// Function to "get rid" of a spawned context menu. Undue (?) care is taken to clear any attached
