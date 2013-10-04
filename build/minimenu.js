@@ -210,13 +210,14 @@
 		// Function to "get rid" of a spawned context menu. Undue (?) care is taken to clear any attached
 		// delegates/event-listeners before the element is removed from the DOM and cut off.
 		unload: function() {
-			var
-				context = this.context,
-				selector = this.selector,
-				itemEvents = this.itemEvents || [];
+			var i, context, selector, itemEvents;
+			
+			context = this.context,
+			selector = this.selector,
+			itemEvents = this.itemEvents || [];
 				
 			$(context).undelegate(selector, this.events);
-			for (var i = 0; i < itemEvents.length; i++) {
+			for (i = 0; i < itemEvents.length; i++) {
 				$(context).undelegate(selector, itemEvents[i]);
 			}
 			
@@ -233,10 +234,12 @@
 	// The syntax for the call is identical to .delegate() except the arguments structure is
 	// substituted for .delegate()'s required callback function.
 	$.fn.minimenu = function(selector, events, args) {
-		var 
-			context = this.selector || document,
-			invalidClass = args.invalidClass || 'mm-invalid',
-			menu = contextmenu(selector, context, events, args);
+		var context, invalidClass, menu;
+		
+		context = this.selector || document;
+		invalidClass = args.invalidClass || 'mm-invalid';
+		menu = contextmenu(selector, context, events, args);
+		
 		menus[menu.id] = menu;
 		
 		// Create a delegate to spawn a context menu based on provided condition parameters.
