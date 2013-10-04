@@ -153,20 +153,20 @@
 		// post-hook will run with the menu DOM element as the context.
 		
 		// In both cases the context menu associated with the spawn event is passed through as an extension to the
-		// event arguments and is accessible with e.currentMenu.
+		// event arguments and is accessible with e.menu.
 		hook: function(end, callback) {
-			var currentMenu = menus[this.id];
+			var menu = menus[this.id];
 			
 			if (end === 'pre') {
 				this.hooks.pre = function(e) {
-					e.currentMenu = currentMenu;
+					e.menu = menu;
 					callback.call(e.currentTarget, e);
 				};
 			}
 			else if (end === 'post') {
 				this.hooks.post = function(e) {
-					e.currentMenu = currentMenu;
-					callback.call(currentMenu.el, e);
+					e.menu = menu;
+					callback.call(menu.el, e);
 				};
 			}
 			
