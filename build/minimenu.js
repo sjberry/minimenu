@@ -185,13 +185,18 @@
 			return this;
 		},
 		
-		// An abstraction to find the options associated with a given menu based.
-		// This is included so you don't need to inspect the inherent, automatic structure to
-		// manually run .find(). The function itself functions exactly as .find() would but is
-		// DOM agnostic.
-		options: function(selector) {
-			var $options = $(this.el).find('> div');
-			return (typeof selector === 'undefined') ? $options : $options.filter(selector);
+		options: function(listString) {
+			var selector, $options;
+			
+			$options = $(this.el).find('> div');
+			selector = $.map($.trim(listString).split(/\s+/g), function(d) {
+				if (d.length > 0) {
+					return '.mm-' + d;
+				}
+			}).join(',');
+			
+			return selector ? $options.filter(selector) : $options;
+		},
 		},
 		
 		// Function to "get rid" of a spawned context menu. Undue (?) care is taken to clear any attached
