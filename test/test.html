@@ -2,42 +2,38 @@
 <html lang="en-US">
 	<head>
 		<meta charset="utf-8" />
-		
+
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-		
-		<link rel="stylesheet" type="text/css" href="minimenu.css" />
+
+		<link rel="stylesheet" type="text/css" href="../css/minimenu.css" />
 		<!--<script type="text/javascript" src="minimenu.js"></script>-->
-		<script type="text/javascript" src="minimenu.min.js"></script>
-		
+		<script type="text/javascript" src="../src/minimenu.js"></script>
+
 		<script type="text/javascript">
 			// Placing "menu" in the global scope to enable command line interaction.
 			var menu;
-			
+
 			$(document).ready(function() {
-				menu = $(document).minimenu('div.test', 'contextmenu', {
+				menu = $(document).minimenu('contextmenu', 'div.test', {
 					options: [
 						{ event: 'view', text: 'View this!' },
 						{ event: 'edit', text: 'Edit this!' },
 						{ event: 'delete', text: 'Delete this!' },
 						{ text: 'Cancel!' },
 					]
-				}).hook('pre', function(e) {
-					console.log('Pre-hook Context:');
-					console.log(this);
-					console.log('Pre-hook Event:');
-					console.log(e);
-					e.currentMenu.options('.mm-view').addClass('invalid');
-				}).hook('post', function(e) {
-					console.log('Post-hook Context:');
-					console.log(this);
-					console.log('Post-hook Event:');
-					console.log(e);
-					e.currentMenu.options().removeClass('invalid');
+				}).hook('pre', function(e, menu, target) {
+					console.log(arguments);
+
+					menu.invalidate('view', 'Testing');
+				}).hook('post', function(e, menu, target) {
+					console.log(arguments);
+
+					menu.reset();
 				});
-				
+
 				console.log(menu);
-				
-				$(document).delegate('div.test', 'view edit delete', function(e) {
+
+				$(document).on('view edit delete', 'div.test', function(e) {
 					console.log('Target Element:');
 					console.log(this);
 					console.log('Event Type:');
@@ -45,13 +41,13 @@
 				});
 			});
 		</script>
-		
+
 		<style type="text/css">
 			div.test {
 				display: inline-block;
 				width: 50px; height: 50px;
 				margin: 25px;
-				
+
 				background-color: black;
 			}
 		</style>
