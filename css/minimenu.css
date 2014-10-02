@@ -1,25 +1,31 @@
 div.mm-anchor {
+	display: table;
 	position: absolute;
 	z-index: 777;
+}
+div.mm-anchor > div {
+	display: table-row;
+	cursor: pointer;
+}
+div.mm-anchor > div > div {
+	display: table-cell;
+	padding: 3px;
+	vertical-align: middle;
+}
+
+
+/* USER SETTINGS */
+div.mm-anchor {
 	background-color: #DDD;
 	border: 1px solid #666;
 	box-shadow: 0 0 5px #AAA;
 }
-div.mm-anchor > div {
-	cursor: pointer;
-	padding: 3px;
-	background-repeat: no-repeat;
-}
 div.mm-anchor > div:hover { background-color: #B8D3E6; }
-div.mm-anchor > div:first-child { margin: 0; }
-div.mm-anchor.construct { position: static; }
-div.mm-anchor.construct > div { display: inline; }
-div.mm-anchor > div.mm-invalid {
-	cursor: default;
+div.mm-invalid {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
 	filter: alpha(opacity=40);
 	-moz-opacity: 0.4;
 	-khtml-opacity: 0.4;
 	opacity: 0.4;
 }
-div.mm-anchor > div.mm-invalid:hover { background-color: #DDD; }
+div.mm-invalid:hover { background-color: #DDD; }
